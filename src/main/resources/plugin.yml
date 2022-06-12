@@ -1,0 +1,11 @@
+name: Endless
+main: com.Endless.ELCore
+version: 1.0
+author: Endless
+commands:
+  rankset:
+  gamemode:
+    aliases: [gm]
+  database:
+    aliases: [db]
+  filter:
