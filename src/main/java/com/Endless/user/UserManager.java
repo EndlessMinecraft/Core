@@ -7,11 +7,9 @@ import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerLoginEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -62,7 +60,7 @@ public class UserManager implements Listener {
         e.setQuitMessage(null);
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.NORMAL)
     public void playerChat(AsyncPlayerChatEvent event) {
 
 //        String message = event.getMessage();
@@ -93,5 +91,16 @@ public class UserManager implements Listener {
 //        String replaceWord = StringUtils.repeat("*", word.length());
 //        return replaceWord;
 //    }
+
+    @EventHandler
+    public void disableBukkitCommands(PlayerCommandPreprocessEvent event) {
+        if (!ELCore.getInstance().getServerConfig().getString("server.type").contains("testing")) {
+            String message = event.getMessage().toLowerCase();
+            if (message.startsWith("/help") || message.startsWith("/minecraft:") || message.toLowerCase().startsWith("/?") || message.toLowerCase().startsWith("/icanhasbukkit") || message.toLowerCase().startsWith("/version") || message.toLowerCase().startsWith("/ver") || message.toLowerCase().startsWith("/op") || message.toLowerCase().startsWith("/bukkit:") || message.startsWith("/me") || message.startsWith("/endless")) {
+                event.getPlayer().sendMessage("Unknown command. Type \"/help\" for help.");
+                event.setCancelled(true);
+            }
+        }
+    }
 
 }

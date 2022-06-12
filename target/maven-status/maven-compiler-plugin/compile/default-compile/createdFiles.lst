@@ -1,5 +1,8 @@
 com\Endless\database\ConnectionPoolManager.class
+com\Endless\utilities\ServerUtilities.class
+com\Endless\commands\vanished\Vanish.class
 com\Endless\commands\databasecmds\DatabaseCMD.class
+com\Endless\commands\vanished\VanishCommand.class
 com\Endless\database\DatabaseManager.class
 com\Endless\commands\rankset\RankSet.class
 com\Endless\user\UserRank.class

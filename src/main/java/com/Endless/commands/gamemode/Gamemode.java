@@ -4,6 +4,7 @@ import com.Endless.ELCore;
 import com.Endless.commands.CMDBase;
 import com.Endless.user.User;
 import com.Endless.user.UserRank;
+import com.Endless.utilities.ServerUtilities;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -21,7 +22,7 @@ public class Gamemode extends CMDBase {
         if (ELCore.getInstance().getServerConfig().getString("server.type").equalsIgnoreCase("games")) {
             this.user = new User(getPlayer());
             if (!this.user.compareRank(UserRank.ADMIN)) {
-                getPlayer().sendMessage(ChatColor.BLUE + "Permission " + ChatColor.GRAY + "You do not have permission to run this command.");
+                getPlayer().sendMessage(ServerUtilities.format("Permission", ChatColor.GRAY + "You do not have permission to run this command."));
                 return;
             }
         }
@@ -30,11 +31,11 @@ public class Gamemode extends CMDBase {
             switch(getPlayer().getGameMode()){
                 case CREATIVE -> {
                     getPlayer().setGameMode(GameMode.ADVENTURE);
-                    getPlayer().sendMessage(ChatColor.BLUE + "Gamemode > " + ChatColor.GRAY + "Your gamemode has been set to" + ChatColor.GREEN + " adventure" + ChatColor.GRAY + ".");
+                    getPlayer().sendMessage(ServerUtilities.format("Gamemode", ChatColor.GRAY + "Your gamemode has been set to" + ChatColor.GREEN + " adventure" + ChatColor.GRAY + "."));
                 }
                 case ADVENTURE, SURVIVAL -> {
                     getPlayer().setGameMode(GameMode.CREATIVE);
-                    getPlayer().sendMessage(ChatColor.BLUE + "Gamemode > " + ChatColor.GRAY + "Your gamemode has been set to" + ChatColor.GREEN + " creative" + ChatColor.GRAY + ".");
+                    getPlayer().sendMessage(ServerUtilities.format("Gamemode", ChatColor.GRAY + "Your gamemode has been set to" + ChatColor.GREEN + " creative" + ChatColor.GRAY + "."));
                 }
 
             }
@@ -42,21 +43,21 @@ public class Gamemode extends CMDBase {
         if ((getArgs().length == 1)) {
             Player other = Bukkit.getPlayer(getArgs()[0]);
             if(other == null){
-                getPlayer().sendMessage(ChatColor.BLUE + "Error > " + ChatColor.GRAY + "That player does not exist.");
+                getPlayer().sendMessage(ServerUtilities.format("Error", ChatColor.GRAY + "That player does not exist."));
                 return;
             }
             switch(other.getGameMode()){
                 case CREATIVE -> {
                     other.setGameMode(GameMode.ADVENTURE);
-                    getPlayer().sendMessage(ChatColor.BLUE + "Gamemode > " + ChatColor.GRAY + "Set " + ChatColor.YELLOW + other.getName() + ChatColor.GRAY +
-                            "'s gamemode to" + ChatColor.GREEN + " adventure" + ChatColor.GRAY + ".");
-                    other.sendMessage(ChatColor.BLUE + "Gamemode > " + ChatColor.GRAY + "Your gamemode has been set to" + ChatColor.GREEN + " adventure" + ChatColor.GRAY + ".");
+                    getPlayer().sendMessage(ServerUtilities.format("Gamemode", ChatColor.GRAY + "Set " + ChatColor.YELLOW + other.getName() + ChatColor.GRAY +
+                            "'s gamemode to" + ChatColor.GREEN + " adventure" + ChatColor.GRAY + "."));
+                    other.sendMessage(ServerUtilities.format("Gamemode", ChatColor.GRAY + "Your gamemode has been set to" + ChatColor.GREEN + " adventure" + ChatColor.GRAY + "."));
                 }
                 case ADVENTURE, SURVIVAL -> {
                     other.setGameMode(GameMode.CREATIVE);
-                    getPlayer().sendMessage(ChatColor.BLUE + "Gamemode > " + ChatColor.GRAY + "Set " + ChatColor.YELLOW + other.getName() + ChatColor.GRAY +
-                            "'s gamemode to" + ChatColor.GREEN + " creative" + ChatColor.GRAY + ".");
-                    other.sendMessage(ChatColor.BLUE + "Gamemode > " + ChatColor.GRAY + "Your gamemode has been set to" + ChatColor.GREEN + " creative" + ChatColor.GRAY + ".");
+                    getPlayer().sendMessage(ServerUtilities.format("Gamemode", ChatColor.GRAY + "Set " + ChatColor.YELLOW + other.getName() + ChatColor.GRAY +
+                            "'s gamemode to" + ChatColor.GREEN + " creative" + ChatColor.GRAY + "."));
+                    other.sendMessage(ServerUtilities.format("Gamemode", ChatColor.GRAY + "Your gamemode has been set to" + ChatColor.GREEN + " creative" + ChatColor.GRAY + "."));
                 }
             }
         }

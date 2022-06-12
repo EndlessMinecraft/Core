@@ -4,11 +4,14 @@ import com.Endless.commands.databasecmds.DatabaseCMD;
 import com.Endless.commands.filtercmds.FilterCommand;
 import com.Endless.commands.gamemode.Gamemode;
 import com.Endless.commands.rankset.RankSet;
+import com.Endless.commands.vanished.Vanish;
+import com.Endless.commands.vanished.VanishCommand;
 import com.Endless.database.DatabaseManager;
 import com.Endless.server.Config;
 import com.Endless.user.UserManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.Listener;
@@ -39,6 +42,7 @@ public class ELCore extends JavaPlugin
 
     private void initClasses() {
         getServer().getPluginManager().registerEvents((Listener)new UserManager(), (Plugin)this);
+        getServer().getPluginManager().registerEvents((Listener)new Vanish(), (Plugin)this);
         this.serverConfig = new Config(this);
     }
 
@@ -59,6 +63,7 @@ public class ELCore extends JavaPlugin
         getCommand("gamemode").setExecutor((CommandExecutor)new Gamemode());
         getCommand("database").setExecutor((CommandExecutor)new DatabaseCMD());
         getCommand("filter").setExecutor((CommandExecutor)new FilterCommand());
+        getCommand("vanish").setExecutor((CommandExecutor)new VanishCommand());
     }
 
 }

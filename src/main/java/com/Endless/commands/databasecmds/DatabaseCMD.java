@@ -3,6 +3,7 @@ package com.Endless.commands.databasecmds;
 import com.Endless.ELCore;
 import com.Endless.commands.CMDBase;
 import com.Endless.user.UserRank;
+import com.Endless.utilities.ServerUtilities;
 import org.bukkit.ChatColor;
 
 public class DatabaseCMD extends CMDBase {
@@ -23,12 +24,12 @@ public class DatabaseCMD extends CMDBase {
                     getPlayer().sendMessage(ChatColor.RED + "\nDB Stats (completed in " + ChatColor.WHITE + elapsed + "s" + ChatColor.RED + "): \nDatabase: " + ChatColor.WHITE + Database + ChatColor.RED + "\nPlayer Entries: " + playerEntries + "\n");
                     ELCore.getInstance().getDatabaseManager().getDBTotalSize("players");
                 } catch (Exception e) {
-                    getPlayer().sendMessage(ChatColor.RED + "There was a problem fetching info, please try again!");
+                    getPlayer().sendMessage(ServerUtilities.format("Error", ChatColor.RED + "There was a problem fetching info, please try again!"));
                 }
             } else if ((getArgs()).length == 2 && getArgs()[0].equalsIgnoreCase("lookup")) {
                 try {
                     if (!ELCore.getInstance().getDatabaseManager().exists(getArgs()[1])) {
-                        getPlayer().sendMessage(ChatColor.RED + "Player does not exist in DB!");
+                        getPlayer().sendMessage(ServerUtilities.format("Error", ChatColor.RED + "Player does not exist in DB!"));
                     } else {
                         getPlayer().sendMessage(ChatColor.RED + "Fetching info for " + ChatColor.WHITE + ELCore.getInstance().getDatabaseManager().getUsername(getArgs()[1]) + ChatColor.RED + "...");
                         long start = System.currentTimeMillis();
@@ -40,10 +41,10 @@ public class DatabaseCMD extends CMDBase {
                         getPlayer().sendMessage(ChatColor.RED + "\nDB Lookup (completed in " + ChatColor.WHITE + elapsed + "s" + ChatColor.RED + "): \nUUID: " + uuid + "\nUsername: " + username + "\nRank: " + rank + "\nLast Login: " + lastlogin + "\n");
                     }
                 } catch (Exception e) {
-                    getPlayer().sendMessage(ChatColor.RED + "There was a problem fetching info, please try again!");
+                    getPlayer().sendMessage(ServerUtilities.format("Error", ChatColor.RED + "There was a problem fetching info, please try again!"));
                 }
             } else {
-                getPlayer().sendMessage(ChatColor.RED + "Invalid Arguments! Correct Arguments: " + getUsage());
+                getPlayer().sendMessage(ServerUtilities.format("Error",  ChatColor.RED + "Invalid Arguments! Correct Arguments: " + getUsage()));
             }
         }
     }

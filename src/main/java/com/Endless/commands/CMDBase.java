@@ -3,6 +3,7 @@ package com.Endless.commands;
 import com.Endless.ELCore;
 import com.Endless.user.User;
 import com.Endless.user.UserRank;
+import com.Endless.utilities.ServerUtilities;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -67,14 +68,14 @@ public abstract class CMDBase implements CommandExecutor {
                     }
                 }
             } else {
-                player.sendMessage(ChatColor.BLUE + "Permission > " + ChatColor.GRAY + "You do not have permission to run this command.");
+                player.sendMessage(ServerUtilities.format("Permission",  ChatColor.GRAY + "You do not have permission to run this command."));
                 return true;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             return true;
         } catch (Exception e) {
             e.printStackTrace();
-            sender.sendMessage(ChatColor.BLUE + "Error > " + ChatColor.GRAY + "There was an error performing this command, please contact a staff member with information.");
+            sender.sendMessage(ServerUtilities.format("Error", ChatColor.GRAY + "There was an error performing this command, please contact a staff member with information."));
             return true;
         }
         return false;

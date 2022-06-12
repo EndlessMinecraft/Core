@@ -9,3 +9,5 @@ commands:
   database:
     aliases: [db]
   filter:
+  vanish:
+    aliases: [v]

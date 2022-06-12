@@ -51,7 +51,7 @@ public class DatabaseManager {
         PreparedStatement ps = null;
         try {
             conn = this.pool.getConnection();
-            ps = conn.prepareStatement("INSERT INTO `player_data` (UUID,NAME,COINS,RANK,MESSAGING,LastLogin) VALUES (?,?,?,?,?,?)");
+            ps = conn.prepareStatement("INSERT INTO `player_data` (UUID,NAME,COINS,RANK,MESSAGING,LastLogin,Vanished) VALUES (?,?,?,?,?,?,?)");
             ps.setString(1, uuid.toString());
             ps.setString(2, player.getName());
             ps.setString(3, "0");
@@ -60,6 +60,7 @@ public class DatabaseManager {
             DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
             Date date = new Date();
             ps.setNString(6, dateFormat.format(date));
+            ps.setInt(7, 0);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -331,6 +332,42 @@ public class DatabaseManager {
             conn = this.pool.getConnection();
             ps = conn.prepareStatement("UPDATE `player_data` SET RANK=? WHERE UUID=?;");
             ps.setString(1, rank.toString());
+            ps.setString(2, getUUID(player));
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            this.pool.close(conn, ps, null);
+        }
+    }
+
+    public int getVanished(String player) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = this.pool.getConnection();
+            ps = conn.prepareStatement("SELECT Vanished FROM `player_data` WHERE UUID = ? LIMIT 1");
+            ps.setString(1, getUUID(player));
+            rs = ps.executeQuery();
+            if (rs.next())
+                return rs.getInt("Vanished");
+        } catch (SQLException e) {
+            return 0;
+        } finally {
+            this.pool.close(conn, ps, rs);
+        }
+        return 0;
+    }
+
+    public void setVanish(String player, int v) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        try {
+            conn = this.pool.getConnection();
+            ps = conn.prepareStatement("UPDATE `player_data` SET VANISHED=? WHERE UUID=?;");
+            ps.setInt(1, v);
             ps.setString(2, getUUID(player));
             ps.executeUpdate();
             ps.close();
