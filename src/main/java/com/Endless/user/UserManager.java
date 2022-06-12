@@ -6,6 +6,7 @@ import com.Endless.utilities.PlayerUtilities;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -79,12 +80,20 @@ public class UserManager implements Listener {
 //            }
 
         // Chat formatting
+        event.setCancelled(true);
         User user = new User(event.getPlayer());
-        if (user.getRank() == UserRank.MEMBER) {
-            event.setFormat(ChatColor.GRAY + event.getPlayer().getName() + ChatColor.DARK_GRAY + ": " + ChatColor.WHITE + "%2$s");
-        } else {
-            event.setFormat(user.getRank().getColor().toString() + ChatColor.translateAlternateColorCodes('&', user.getPrefix()) + ChatColor.GRAY + event.getPlayer().getName() + ChatColor.DARK_GRAY + ": " + ChatColor.WHITE + "%2$s");
+        for (Player pl : Bukkit.getServer().getOnlinePlayers()) {
+            if(event.getMessage().toLowerCase().contains(pl.getName().toLowerCase())){
+                pl.sendMessage(user.getRank().getColor().toString() + ChatColor.translateAlternateColorCodes('&', user.getPrefix()) + ChatColor.GRAY + event.getPlayer().getName() + ChatColor.DARK_GRAY + ": " + ChatColor.WHITE + event.getMessage().replaceAll("(?i)" + pl.getName(), ChatColor.RED + pl.getName()));
+            }else{
+                pl.sendMessage(user.getRank().getColor().toString() + ChatColor.translateAlternateColorCodes('&', user.getPrefix()) + ChatColor.GRAY + event.getPlayer().getName() + ChatColor.DARK_GRAY + ": " + ChatColor.WHITE + event.getMessage());
+            }
         }
+//        if (user.getRank() == UserRank.MEMBER) {
+//            event.setFormat(ChatColor.GRAY + event.getPlayer().getName() + ChatColor.DARK_GRAY + ": " + ChatColor.WHITE + "%2$s");
+//        } else {
+//            event.setFormat(user.getRank().getColor().toString() + ChatColor.translateAlternateColorCodes('&', user.getPrefix()) + ChatColor.GRAY + event.getPlayer().getName() + ChatColor.DARK_GRAY + ": " + ChatColor.WHITE + "%2$s");
+//        }
     }
 //              Filter stuff
 //    public String convertWord (String word){

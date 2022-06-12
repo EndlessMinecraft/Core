@@ -8,7 +8,15 @@ import com.Endless.utilities.ServerUtilities;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.util.StringUtil;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Gamemode extends CMDBase {
     private User user;
@@ -49,18 +57,38 @@ public class Gamemode extends CMDBase {
             switch(other.getGameMode()){
                 case CREATIVE -> {
                     other.setGameMode(GameMode.ADVENTURE);
-                    getPlayer().sendMessage(ServerUtilities.format("Gamemode", ChatColor.GRAY + "Set " + ChatColor.YELLOW + other.getName() + ChatColor.GRAY +
-                            "'s gamemode to" + ChatColor.GREEN + " adventure" + ChatColor.GRAY + "."));
+                    if(other != getPlayer()) {
+                        getPlayer().sendMessage(ServerUtilities.format("Gamemode", ChatColor.GRAY + "Set " + ChatColor.YELLOW + other.getName() + ChatColor.GRAY +
+                                "'s gamemode to" + ChatColor.GREEN + " adventure" + ChatColor.GRAY + "."));
+                    }
                     other.sendMessage(ServerUtilities.format("Gamemode", ChatColor.GRAY + "Your gamemode has been set to" + ChatColor.GREEN + " adventure" + ChatColor.GRAY + "."));
                 }
                 case ADVENTURE, SURVIVAL -> {
                     other.setGameMode(GameMode.CREATIVE);
-                    getPlayer().sendMessage(ServerUtilities.format("Gamemode", ChatColor.GRAY + "Set " + ChatColor.YELLOW + other.getName() + ChatColor.GRAY +
-                            "'s gamemode to" + ChatColor.GREEN + " creative" + ChatColor.GRAY + "."));
+                    if(other != getPlayer()) {
+                        getPlayer().sendMessage(ServerUtilities.format("Gamemode", ChatColor.GRAY + "Set " + ChatColor.YELLOW + other.getName() + ChatColor.GRAY +
+                                "'s gamemode to" + ChatColor.GREEN + " creative" + ChatColor.GRAY + "."));
+                    }
                     other.sendMessage(ServerUtilities.format("Gamemode", ChatColor.GRAY + "Your gamemode has been set to" + ChatColor.GREEN + " creative" + ChatColor.GRAY + "."));
                 }
             }
         }
 
     }
+
+    public static class GamemodeComp implements TabCompleter {
+        @Override
+        public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+            //create new array
+            final List<String> completions = new ArrayList<>();
+            //copy matches of first argument from list
+            if (args.length == 1) {
+                for (Player pl : Bukkit.getServer().getOnlinePlayers()) {
+                    completions.add(pl.getName());
+                }
+            }
+            return completions;
+        }
+    }
+
 }

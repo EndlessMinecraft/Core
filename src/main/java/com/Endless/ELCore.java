@@ -13,6 +13,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
@@ -60,9 +61,13 @@ public class ELCore extends JavaPlugin
 
     public void initCommands(){
         getCommand("rankset").setExecutor((CommandExecutor)new RankSet());
+        getCommand("rankset").setTabCompleter((TabCompleter) new RankSet.SetRankComp());
         getCommand("gamemode").setExecutor((CommandExecutor)new Gamemode());
+        getCommand("gamemode").setTabCompleter((TabCompleter) new Gamemode.GamemodeComp());
         getCommand("database").setExecutor((CommandExecutor)new DatabaseCMD());
+        getCommand("database").setTabCompleter((TabCompleter)new DatabaseCMD.DatabaseComp());
         getCommand("filter").setExecutor((CommandExecutor)new FilterCommand());
+        getCommand("filter").setTabCompleter((TabCompleter) new FilterCommand.FilterComp());
         getCommand("vanish").setExecutor((CommandExecutor)new VanishCommand());
     }
 

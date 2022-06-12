@@ -6,9 +6,16 @@ import com.Endless.user.UserRank;
 import com.Endless.utilities.ServerUtilities;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.util.StringUtil;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class RankSet extends CMDBase {
     public RankSet() {
@@ -68,4 +75,31 @@ public class RankSet extends CMDBase {
             getPlayer().sendMessage(ServerUtilities.format("Error", ChatColor.GRAY + "Invalid arguments. Correct arguments: /rankset <player> <rank>."));
         }
     }
+
+    public static class SetRankComp implements TabCompleter {
+
+        private static final String[] RANKS = { "member", "yt", "builder", "trainee", "mod", "sr.mod", "admin", "dev" };
+        //create a static array of values
+
+        @Override
+        public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+            //create new array
+            final List<String> completions = new ArrayList<>();
+            //copy matches of first argument from list
+            if(args.length == 1){
+                for (Player pl : Bukkit.getServer().getOnlinePlayers()) {
+                    completions.add(pl.getName());
+                }
+            }
+            if(args.length == 2) {
+                completions.clear();
+                StringUtil.copyPartialMatches(args[1], Arrays.asList(RANKS), completions);
+            }
+            return completions;
+        }
+    }
+
+
 }
+
+

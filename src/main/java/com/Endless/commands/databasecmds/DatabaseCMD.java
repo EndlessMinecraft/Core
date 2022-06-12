@@ -4,7 +4,17 @@ import com.Endless.ELCore;
 import com.Endless.commands.CMDBase;
 import com.Endless.user.UserRank;
 import com.Endless.utilities.ServerUtilities;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
+import org.bukkit.util.StringUtil;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class DatabaseCMD extends CMDBase {
         ELCore plugin = (ELCore) ELCore.getPlugin(ELCore.class);
@@ -47,4 +57,29 @@ public class DatabaseCMD extends CMDBase {
                 getPlayer().sendMessage(ServerUtilities.format("Error",  ChatColor.RED + "Invalid Arguments! Correct Arguments: " + getUsage()));
             }
         }
+    public static class DatabaseComp implements TabCompleter {
+        private static final String[] completes = { "stats", "lookup" };
+        //create a static array of values
+
+        @Override
+        public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+            //create new array
+            final List<String> completions = new ArrayList<>();
+            //copy matches of first argument from list
+            if(args.length == 2){
+                if(args[0].toString() != "stats") {
+                    completions.clear();
+                    for (Player pl : Bukkit.getServer().getOnlinePlayers()) {
+                        completions.add(pl.getName());
+                    }
+                }
+            }
+            if(args.length == 1) {
+                completions.clear();
+                StringUtil.copyPartialMatches(args[0], Arrays.asList(completes), completions);
+            }
+            return completions;
+        }
+}
+
     }

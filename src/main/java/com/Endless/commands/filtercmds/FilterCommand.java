@@ -5,7 +5,17 @@ import com.Endless.commands.CMDBase;
 import com.Endless.user.UserManager;
 import com.Endless.user.UserRank;
 import com.Endless.utilities.ServerUtilities;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
+import org.bukkit.util.StringUtil;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class FilterCommand extends CMDBase {
 
@@ -43,4 +53,20 @@ public class FilterCommand extends CMDBase {
 
 
     }
+
+    public static class FilterComp implements TabCompleter {
+        private static final String[] completes = { "add", "remove" };
+
+        @Override
+        public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+            //create new array
+            final List<String> completions = new ArrayList<>();
+            //copy matches of first argument from list
+            if (args.length == 1) {
+                StringUtil.copyPartialMatches(args[0], Arrays.asList(completes), completions);
+            }
+            return completions;
+        }
+    }
+
 }
