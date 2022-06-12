@@ -23,17 +23,17 @@ import java.util.Locale;
 public class UserManager implements Listener {
 
 
-    public static ArrayList<String> badWords = new ArrayList<>();
+//    public static ArrayList<String> badWords = new ArrayList<>();
+//
+//   public UserManager() {
+//        addBadWords();
+//    }
+//      Filter stuff WIP.
+//
+//    private void addBadWords() {
+//    }
 
-    public UserManager() {
-        addBadWords();
-    }
-
-
-    private void addBadWords() {
-    }
-
-
+    // PlayerLoginEvent to create player in DB if they don't already exist.
     @EventHandler
     public void playerLogin(PlayerLoginEvent event) {
 
@@ -48,12 +48,13 @@ public class UserManager implements Listener {
         ELCore.getInstance().getDatabaseManager().updateLastLogin(event.getPlayer());
     }
 
+    // Set player tablist on join.
     @EventHandler
     public void playerJoin(PlayerJoinEvent e){
         e.setJoinMessage(null);
-        PlayerUtilities.sendTabList(e.getPlayer(), ChatColor.translateAlternateColorCodes('&', "&cWelcome to ") + ChatColor.RED.toString() + ChatColor.BOLD.toString() +
-                "EndlessMC",
-                ChatColor.translateAlternateColorCodes('&', "&cendlessmc.xyz"));
+        PlayerUtilities.sendTabList(e.getPlayer(), "\n" + ChatColor.translateAlternateColorCodes('&', "&cYou are playing ") + ChatColor.RED.toString() + ChatColor.BOLD.toString() +
+                "EndlessMC" + "\n", "\n" +
+                ChatColor.translateAlternateColorCodes('&', "&cendlessmc.xyz") + "\n");
     }
 
     @EventHandler
@@ -64,32 +65,33 @@ public class UserManager implements Listener {
     @EventHandler
     public void playerChat(AsyncPlayerChatEvent event) {
 
-        String message = event.getMessage();
-        boolean filter = false;
-
+//        String message = event.getMessage();
+//        boolean filter = false;
+//
 //        for (String badWord : badWords) {
 //            if (message.toLowerCase().contains(badWord.toLowerCase())) {
 //                filter = true;
 //            }
 //        }
+//
+//              More WIP filter stuff
+//
+//            for (String badWord : badWords) {
+//                event.setMessage(message.replaceAll(badWord, convertWord(badWord)));
+//            }
 
-
-            for (String badWord : badWords) {
-                event.setMessage(message.replaceAll(badWord, convertWord(badWord)));
-            }
-
-
+        // Chat formatting
         User user = new User(event.getPlayer());
         if (user.getRank() == UserRank.MEMBER) {
             event.setFormat(ChatColor.GRAY + event.getPlayer().getName() + ChatColor.DARK_GRAY + ": " + ChatColor.WHITE + "%2$s");
         } else {
-            event.setFormat(user.getRank().getColor().toString() + "[" + user.getRank().getName().toUpperCase() + "] " + ChatColor.GRAY + event.getPlayer().getName() + ChatColor.DARK_GRAY + ": " + ChatColor.WHITE + "%2$s");
+            event.setFormat(user.getRank().getColor().toString() + ChatColor.translateAlternateColorCodes('&', user.getPrefix()) + ChatColor.GRAY + event.getPlayer().getName() + ChatColor.DARK_GRAY + ": " + ChatColor.WHITE + "%2$s");
         }
     }
-
-    public String convertWord (String word){
-        String replaceWord = StringUtils.repeat("*", word.length());
-        return replaceWord;
-    }
+//              Filter stuff
+//    public String convertWord (String word){
+//        String replaceWord = StringUtils.repeat("*", word.length());
+//        return replaceWord;
+//    }
 
 }

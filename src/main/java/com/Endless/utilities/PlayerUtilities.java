@@ -5,6 +5,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 
 public class PlayerUtilities {
+
+    // Send player a Tab List header and footer.
         public static void sendTabList(Player player, String header, String footer) {
             try {
                 if (NMSUtilities.compareMCVersionHigherOrEqual("1.8")) {
@@ -26,6 +28,7 @@ public class PlayerUtilities {
                 e.printStackTrace();
             }
         }
+        // Reset player.
     public static void reset(Player player) {
         player.setGameMode(GameMode.ADVENTURE);
         player.setAllowFlight(false);

@@ -2,6 +2,7 @@ package com.Endless.user;
 
 import org.bukkit.ChatColor;
 
+// User rank enum with return values.
 public enum UserRank {
     MEMBER("Member", ChatColor.YELLOW, "&f", false),
     YT("YT", ChatColor.GOLD, "&6[YT]&f ", false),

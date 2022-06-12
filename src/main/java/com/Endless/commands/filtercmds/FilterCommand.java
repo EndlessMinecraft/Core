@@ -19,9 +19,9 @@ public class FilterCommand extends CMDBase {
             return;
         }
         boolean exists = false;
-        if (UserManager.badWords.contains(getArgs()[0])) {
-            exists = true;
-        }
+//        if (UserManager.badWords.contains(getArgs()[0])) {
+//            exists = true;
+//        }
         if (getArgs()[0].equalsIgnoreCase("add")) {
             if (exists) {
                 getPlayer().sendMessage(ChatColor.BLUE + "Error > " + ChatColor.GRAY + "That word is already in the filter.");
