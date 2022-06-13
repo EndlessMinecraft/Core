@@ -18,6 +18,7 @@ public class VanishCommand extends CMDBase {
     @Override
     public void runCMD(){
         switch(ELCore.getInstance().getDatabaseManager().getVanished(getPlayer().getName().toString())) {
+
             case 0:
                 try {
                     ELCore.getInstance().getDatabaseManager().setVanish(getPlayer().getName().toString(), 1);

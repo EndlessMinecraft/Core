@@ -11,3 +11,4 @@ commands:
   filter:
   vanish:
     aliases: [v]
+  gui:
