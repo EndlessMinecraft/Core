@@ -1,4 +1,5 @@
 E:\Core\src\main\java\com\Endless\database\DatabaseManager.java
+E:\Core\src\main\java\com\Endless\utilities\Glow.java
 E:\Core\src\main\java\com\Endless\commands\CMDBase.java
 E:\Core\src\main\java\com\Endless\user\User.java
 E:\Core\src\main\java\com\Endless\utilities\PlayerUtilities.java
@@ -6,12 +7,18 @@ E:\Core\src\main\java\com\Endless\user\UserRank.java
 E:\Core\src\main\java\com\Endless\ELCore.java
 E:\Core\src\main\java\com\Endless\utilities\NMSUtilities.java
 E:\Core\src\main\java\com\Endless\commands\vanished\VanishCommand.java
+E:\Core\src\main\java\com\Endless\creators\ItemCreator.java
+E:\Core\src\main\java\com\Endless\commands\gui\guicommand.java
 E:\Core\src\main\java\com\Endless\commands\rankset\RankSet.java
 E:\Core\src\main\java\com\Endless\commands\gamemode\Gamemode.java
 E:\Core\src\main\java\com\Endless\user\UserManager.java
+E:\Core\src\main\java\com\Endless\utilities\Gui.java
 E:\Core\src\main\java\com\Endless\commands\filtercmds\FilterCommand.java
 E:\Core\src\main\java\com\Endless\commands\databasecmds\DatabaseCMD.java
 E:\Core\src\main\java\com\Endless\utilities\ServerUtilities.java
 E:\Core\src\main\java\com\Endless\server\Config.java
+E:\Core\src\main\java\com\Endless\utilities\PluginMessaging.java
 E:\Core\src\main\java\com\Endless\commands\vanished\Vanish.java
+E:\Core\src\main\java\com\Endless\creators\InventoryCreator.java
 E:\Core\src\main\java\com\Endless\database\ConnectionPoolManager.java
+E:\Core\src\main\java\com\Endless\utilities\Text.java

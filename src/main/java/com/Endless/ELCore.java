@@ -10,15 +10,19 @@ import com.Endless.commands.vanished.VanishCommand;
 import com.Endless.database.DatabaseManager;
 import com.Endless.server.Config;
 import com.Endless.user.UserManager;
+import com.google.common.io.ByteArrayDataInput;
+import com.google.common.io.ByteStreams;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.messaging.PluginMessageListener;
 
 public class ELCore extends JavaPlugin
 {
@@ -33,6 +37,7 @@ public class ELCore extends JavaPlugin
         initClasses();
         initDatabase();
         this.config.addDefault("server.type", "Lobby");
+        this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     }
 
     private DatabaseManager db;
@@ -45,6 +50,7 @@ public class ELCore extends JavaPlugin
     private void initClasses() {
         getServer().getPluginManager().registerEvents((Listener)new UserManager(), (Plugin)this);
         getServer().getPluginManager().registerEvents((Listener)new Vanish(), (Plugin)this);
+        this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         this.serverConfig = new Config(this);
     }
 
@@ -73,4 +79,9 @@ public class ELCore extends JavaPlugin
         getCommand("gui").setExecutor((CommandExecutor)new guicommand());
     }
 
+    public void onDisable(){
+        this.db.onDisable();
+        this.getServer().getMessenger().unregisterOutgoingPluginChannel(this);
+        this.getServer().getMessenger().unregisterIncomingPluginChannel(this);
+    }
 }

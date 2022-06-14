@@ -15,6 +15,7 @@ import org.bukkit.util.StringUtil;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class RankSet extends CMDBase {
@@ -42,17 +43,14 @@ public class RankSet extends CMDBase {
                 }
                 try {
                     if (theRank.equals("YT")) {
-                        newRank = UserRank.YT;
-                        theRank = theRank.substring(0, 1).toUpperCase() + theRank.substring(1);
-                    } else if (theRank.equals("SR.MOD")) {
-                        newRank = UserRank.SR_MOD;
+                        newRank = UserRank.YOUTUBE;
                         theRank = theRank.substring(0, 1).toUpperCase() + theRank.substring(1);
                     } else {
                         theRank = theRank.substring(0, 1).toUpperCase() + theRank.substring(1);
                         newRank = UserRank.valueOf(theRank);
                     }
                 } catch (Exception e) {
-                    getPlayer().sendMessage(ServerUtilities.format("Error", ChatColor.GRAY + "Invalid Rank! Valid Ranks: admin, dev, sr.mod, mod, trainee, builder, yt, member."));
+                    getPlayer().sendMessage(ServerUtilities.format("Error", ChatColor.GRAY + "Invalid Rank! Valid Ranks: admin, dev, mod, trainee, builder, yt, member."));
                 }
                 if (newRank == null)
                     return;
@@ -78,7 +76,7 @@ public class RankSet extends CMDBase {
 
     public static class SetRankComp implements TabCompleter {
 
-        private static final String[] RANKS = { "member", "yt", "builder", "trainee", "mod", "sr.mod", "admin", "dev" };
+        private static final String[] RANKS = { "member", "yt", "builder", "trainee", "mod", "admin", "dev" };
         //create a static array of values
 
         @Override
@@ -86,10 +84,13 @@ public class RankSet extends CMDBase {
             //create new array
             final List<String> completions = new ArrayList<>();
             //copy matches of first argument from list
+            final List<String> Players1 = new ArrayList<>();
             if(args.length == 1){
                 for (Player pl : Bukkit.getServer().getOnlinePlayers()) {
-                    completions.add(pl.getName());
+                    Collections.sort(completions);
+                    Players1.add(pl.getName());
                 }
+                StringUtil.copyPartialMatches(args[0], Players1, completions);
             }
             if(args.length == 2) {
                 completions.clear();

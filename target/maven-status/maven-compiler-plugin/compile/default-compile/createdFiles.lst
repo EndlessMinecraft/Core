@@ -28,5 +28,6 @@ com\Endless\commands\rankset\RankSet$SetRankComp.class
 com\Endless\user\UserManager.class
 com\Endless\utilities\Gui$Item.class
 com\Endless\commands\filtercmds\FilterCommand.class
+com\Endless\utilities\PluginMessaging.class
 com\Endless\utilities\NMSUtilities.class
 com\Endless\utilities\PlayerUtilities.class

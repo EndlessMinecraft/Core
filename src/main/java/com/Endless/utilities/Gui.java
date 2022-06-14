@@ -62,7 +62,7 @@ public abstract class Gui implements Listener {
     }
 
     public abstract void init();
-
+//
     protected void addItem(GuiItem guiItem) {
         if (getInventory().firstEmpty() == -1)
             return;
