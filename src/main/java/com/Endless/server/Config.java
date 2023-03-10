@@ -36,9 +36,9 @@ public class Config {
         this.config.addDefault("server.type", "hub");
         this.config.addDefault("server.private", Boolean.valueOf(false));
         this.config.addDefault("database.host", "na02-db.cus.mc-panel.net");
-        this.config.addDefault("database.user", "db_549961");
-        this.config.addDefault("database.password", "b32dd0d82d");
-        this.config.addDefault("database.database", "db_549961");
+        this.config.addDefault("database.user", "db_699304");
+        this.config.addDefault("database.password", "cfdc547878");
+        this.config.addDefault("database.database", "db_699304");
         this.config.options().copyDefaults(true);
         save();
     }

@@ -83,9 +83,10 @@ public class UserManager implements Listener {
         event.setCancelled(true);
         User user = new User(event.getPlayer());
         for (Player pl : Bukkit.getServer().getOnlinePlayers()) {
+
             if(event.getMessage().toLowerCase().contains(pl.getName().toLowerCase())){
-                pl.sendMessage(user.getRank().getColor().toString() + ChatColor.translateAlternateColorCodes('&', user.getPrefix()) + ChatColor.GRAY + event.getPlayer().getName() + ChatColor.DARK_GRAY + ": " + ChatColor.WHITE + event.getMessage().replaceAll("(?i)" + pl.getName(), ChatColor.RED + pl.getName()));
-            }else{
+                pl.sendMessage(user.getRank().getColor().toString() + ChatColor.translateAlternateColorCodes('&', user.getPrefix()) + ChatColor.GRAY + event.getPlayer().getName() + ChatColor.DARK_GRAY + ": " + ChatColor.WHITE + event.getMessage().replaceAll("(?i)" + pl.getName(), ChatColor.RED + pl.getName() + ChatColor.WHITE));
+            }else {
                 pl.sendMessage(user.getRank().getColor().toString() + ChatColor.translateAlternateColorCodes('&', user.getPrefix()) + ChatColor.GRAY + event.getPlayer().getName() + ChatColor.DARK_GRAY + ": " + ChatColor.WHITE + event.getMessage());
             }
         }

@@ -3,7 +3,7 @@ package com.Endless;
 import com.Endless.commands.databasecmds.DatabaseCMD;
 import com.Endless.commands.filtercmds.FilterCommand;
 import com.Endless.commands.gamemode.Gamemode;
-import com.Endless.commands.gui.guicommand;
+import com.Endless.commands.gamemode.GamemodeComp;
 import com.Endless.commands.rankset.RankSet;
 import com.Endless.commands.vanished.Vanish;
 import com.Endless.commands.vanished.VanishCommand;
@@ -70,13 +70,12 @@ public class ELCore extends JavaPlugin
         getCommand("rankset").setExecutor((CommandExecutor)new RankSet());
         getCommand("rankset").setTabCompleter((TabCompleter) new RankSet.SetRankComp());
         getCommand("gamemode").setExecutor((CommandExecutor)new Gamemode());
-        getCommand("gamemode").setTabCompleter((TabCompleter) new Gamemode.GamemodeComp());
+        getCommand("gamemode").setTabCompleter((TabCompleter) new GamemodeComp());
         getCommand("database").setExecutor((CommandExecutor)new DatabaseCMD());
         getCommand("database").setTabCompleter((TabCompleter)new DatabaseCMD.DatabaseComp());
         getCommand("filter").setExecutor((CommandExecutor)new FilterCommand());
         getCommand("filter").setTabCompleter((TabCompleter) new FilterCommand.FilterComp());
         getCommand("vanish").setExecutor((CommandExecutor)new VanishCommand());
-        getCommand("gui").setExecutor((CommandExecutor)new guicommand());
     }
 
     public void onDisable(){

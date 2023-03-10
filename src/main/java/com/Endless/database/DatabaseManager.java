@@ -13,6 +13,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.TimeZone;
 import java.util.UUID;
 
 public class DatabaseManager {
@@ -243,8 +244,9 @@ public class DatabaseManager {
             String statement = "UPDATE `player_data` SET LastLogin=? WHERE UUID=?;";
             conn = this.pool.getConnection();
             ps = conn.prepareStatement(statement);
-            DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+            DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss aa zzzz");
             Date date = new Date();
+            dateFormat.setTimeZone(TimeZone.getTimeZone("CST"));
             ps.setString(1, dateFormat.format(date));
             ps.setString(2, player.getUniqueId().toString());
             ps.executeUpdate();

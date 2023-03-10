@@ -69,7 +69,7 @@ public abstract class Gui implements Listener {
         setItem(guiItem, getInventory().firstEmpty(), new int[0]);
     }
 
-    protected void removeItem(int slot, int... slots) {
+    public void removeItem(int slot, int... slots) {
         for (int query : slots) {
             if (this.events.containsKey(Integer.valueOf(query))) {
                 this.events.remove(Integer.valueOf(query));
@@ -82,7 +82,7 @@ public abstract class Gui implements Listener {
         }
     }
 
-    protected void setItem(GuiItem item, int slot, int... slots) {
+    public void setItem(GuiItem item, int slot, int... slots) {
         for (int query : slots) {
             if (!this.events.containsKey(Integer.valueOf(query))) {
                 this.events.put(Integer.valueOf(query), item);
@@ -95,7 +95,7 @@ public abstract class Gui implements Listener {
         this.inventory.setItem(slot, item.get());
     }
 
-    protected void fillEmptySlots(GuiItem guiItem) {
+    public void fillEmptySlots(GuiItem guiItem) {
         for (int i = 0; i < getInventory().getSize() - 1; i++)
             addItem(guiItem);
     }

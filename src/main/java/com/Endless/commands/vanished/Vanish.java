@@ -26,7 +26,7 @@ public class Vanish implements Listener {
     public static void vanishPlayer(Player player, int t) {
         User user = new User(player);
         switch (t) {
-            case 0 -> {
+            case 0:
                 for (Player pl : Bukkit.getServer().getOnlinePlayers()) {
                     User user1 = new User(pl);
                     if (user.compareRank(user1.getRank())) {
@@ -36,19 +36,23 @@ public class Vanish implements Listener {
                 player.sendMessage(ServerUtilities.format("Vanish", ChatColor.GRAY + "You are vanished."));
                 if(!vanished.contains(player.getName())) { vanished.add(player.getName()); }
                 player.setGameMode(GameMode.CREATIVE);
-            }
-            case 1 -> {
+            case 1:
                 for (Player pl : Bukkit.getServer().getOnlinePlayers()) {
                     pl.showPlayer(player);
                 }
                 PlayerUtilities.reset(player);
                 if(vanished.contains(player.getName())) { vanished.remove(player.getName()); }
-            }
         }
 
     }
 
-
+    public boolean isVanished(String name){
+        if(vanished.contains(name)){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void blockBreak(BlockBreakEvent event) {

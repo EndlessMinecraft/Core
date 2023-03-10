@@ -4,6 +4,7 @@ com\Endless\commands\databasecmds\DatabaseCMD.class
 com\Endless\utilities\Glow.class
 com\Endless\commands\rankset\RankSet.class
 com\Endless\user\UserRank.class
+com\Endless\commands\gamemode\GamemodeComp.class
 com\Endless\ELCore.class
 com\Endless\server\Config.class
 com\Endless\utilities\Text.class
@@ -14,7 +15,6 @@ com\Endless\commands\gamemode\Gamemode$1.class
 com\Endless\utilities\Gui.class
 com\Endless\utilities\NMSUtilities$MethodPredicate.class
 com\Endless\commands\filtercmds\FilterCommand$FilterComp.class
-com\Endless\commands\gamemode\Gamemode$GamemodeComp.class
 com\Endless\utilities\ServerUtilities.class
 com\Endless\commands\vanished\Vanish.class
 com\Endless\utilities\Gui$GuiItem.class
@@ -23,7 +23,6 @@ com\Endless\database\DatabaseManager.class
 com\Endless\commands\gamemode\Gamemode.class
 com\Endless\creators\ItemCreator.class
 com\Endless\commands\CMDBase.class
-com\Endless\commands\gui\guicommand.class
 com\Endless\commands\rankset\RankSet$SetRankComp.class
 com\Endless\user\UserManager.class
 com\Endless\utilities\Gui$Item.class
