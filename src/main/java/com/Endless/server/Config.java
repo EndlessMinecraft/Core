@@ -37,7 +37,7 @@ public class Config {
         this.config.addDefault("server.private", Boolean.valueOf(false));
         this.config.addDefault("database.host", "na02-db.cus.mc-panel.net");
         this.config.addDefault("database.user", "db_699304");
-        this.config.addDefault("database.password", "cfdc547878");
+        this.config.addDefault("database.password", "cfdc547878"); // (<- This no longer exists)
         this.config.addDefault("database.database", "db_699304");
         this.config.options().copyDefaults(true);
         save();
